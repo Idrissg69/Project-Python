@@ -20,7 +20,9 @@ def list_books(db: Session = Depends(get_db)):
 def create_book(book: BookCreate, db: Session = Depends(get_db)):
     new_book = Book(
         title=book.title,
-        isbn=book.isbn
+        isbn=book.isbn,
+        author_id=book.author_id
+
     )
     db.add(new_book)
     db.commit()
