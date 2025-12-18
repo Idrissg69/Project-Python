@@ -1,24 +1,20 @@
 from pydantic import BaseModel
-from .author import AuthorResponse
-from Projet.models.book import BookCategory
-from Projet.schemas.author import AuthorResponse
-from Projet.models.categories import BookCategory
-from Projet.schemas.author import AuthorResponse
-
+from models.categories import BookCategory
+from schemas.author import AuthorResponse
 
 class BookCreate(BaseModel):
     title: str
     isbn: str
-    author_id: int | None = None
-    category: BookCategory = BookCategory.AUTRE
-
+    author_id: int
+    category: BookCategory
 
 class BookResponse(BaseModel):
     id: int
     title: str
     isbn: str
     category: BookCategory
-    author: AuthorResponse | None
+    author: AuthorResponse
 
-    class Config:
-        orm_mode = True
+    model_config = {
+        "from_attributes": True
+    }
